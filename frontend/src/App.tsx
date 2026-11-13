@@ -118,45 +118,59 @@ export function App() {
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-        {/* Date Selector Navigation Bar */}
-        <div className="bg-fresh-surface rounded-card p-3 border border-fresh-border shadow-soft flex items-center justify-between flex-wrap gap-2">
-          <div className="flex items-center gap-1.5">
+        {/* Calo-Inspired Week Day Bar (Sat, Sun, Mon... Today) */}
+        <div className="bg-fresh-surface rounded-2xl p-3 border border-fresh-border shadow-soft flex items-center justify-between gap-2 overflow-x-auto">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {[-3, -2, -1, 0, 1, 2, 3].map((offset) => {
+              const d = new Date(selectedDate);
+              d.setDate(d.getDate() + offset);
+              const iso = d.toISOString().split('T')[0];
+              const isSelected = iso === selectedDate;
+              const isActualToday = iso === new Date().toISOString().split('T')[0];
+              const dayName = d.toLocaleDateString(undefined, { weekday: 'short' });
+              const dayNum = d.getDate();
+
+              return (
+                <button
+                  key={offset}
+                  onClick={() => setSelectedDate(iso)}
+                  className={`flex flex-col items-center justify-center min-w-[44px] py-1.5 px-2 rounded-2xl transition-all ${
+                    isSelected
+                      ? 'bg-black text-white dark:bg-white dark:text-black shadow-md scale-105 font-bold'
+                      : 'hover:bg-fresh-surface-alt text-fresh-muted hover:text-fresh-text'
+                  }`}
+                >
+                  <span className="text-[10px] uppercase tracking-wider opacity-80">{isActualToday ? 'Today' : dayName}</span>
+                  <span className="text-sm font-semibold tabular-nums mt-0.5">{dayNum}</span>
+                  {isSelected && <span className="w-1 h-1 rounded-full bg-orange-400 mt-1" />}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="flex items-center gap-2 pl-3 border-l border-fresh-border shrink-0">
             <button
               onClick={handlePrevDay}
-              className="p-1.5 text-fresh-muted hover:text-fresh-text hover:bg-fresh-surface-alt rounded-btn transition"
+              className="p-2 text-fresh-muted hover:text-fresh-text hover:bg-fresh-surface-alt rounded-full transition border border-fresh-border/50"
               title="Previous Day"
-              aria-label="Previous Day"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4" />
             </button>
-            <div className="flex items-center gap-2 px-2">
-              <Calendar className="w-4 h-4 text-fresh-primary" />
+            <div className="relative">
               <input
                 type="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
-                className="text-sm font-medium text-fresh-text bg-transparent border-none outline-none cursor-pointer"
+                className="text-xs font-semibold px-3 py-1.5 rounded-full bg-fresh-surface-alt text-fresh-text border border-fresh-border outline-none cursor-pointer"
               />
             </div>
             <button
               onClick={handleNextDay}
-              className="p-1.5 text-fresh-muted hover:text-fresh-text hover:bg-fresh-surface-alt rounded-btn transition"
+              className="p-2 text-fresh-muted hover:text-fresh-text hover:bg-fresh-surface-alt rounded-full transition border border-fresh-border/50"
               title="Next Day"
-              aria-label="Next Day"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4" />
             </button>
-          </div>
-
-          <div className="flex items-center gap-2">
-            {!isToday && (
-              <button
-                onClick={handleToday}
-                className="text-xs font-medium px-3.5 py-1.5 rounded-full bg-fresh-surface-alt hover:bg-fresh-border text-fresh-text border border-fresh-border transition"
-              >
-                Jump to Today
-              </button>
-            )}
           </div>
         </div>
 

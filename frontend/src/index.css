@@ -98,6 +98,41 @@
   border-radius: 999px;
 }
 
+/* Futuristic Scanline Animation for Camera Viewfinder */
+@keyframes laserScan {
+  0% {
+    top: 5%;
+    opacity: 0.2;
+  }
+  50% {
+    top: 85%;
+    opacity: 0.9;
+  }
+  100% {
+    top: 5%;
+    opacity: 0.2;
+  }
+}
+
+.animate-laser-scan {
+  animation: laserScan 2.6s ease-in-out infinite;
+}
+
+/* Glassmorphism utility helpers */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.dark .glass-panel {
+  background: rgba(30, 27, 24, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(var(--color-text-muted));
 }

@@ -149,27 +149,38 @@ export const ImageInput: React.FC<ImageInputProps> = ({
 
         {/* Circular Plate-Guide Frame / Upload Dropzone */}
         {detectedTags && previewUrl ? (
-          /* Detected dishes displayed as colored tags over the photo */
+          /* Modern Augmented Reality Food Tagging View (Inspired by Calo AI & Foodvisor) */
           <div className="space-y-4">
-            <div className="relative rounded-card overflow-hidden border border-fresh-border shadow-soft">
+            <div className="relative rounded-3xl overflow-hidden border border-fresh-border shadow-xl bg-black aspect-[4/3] sm:aspect-video flex items-center justify-center">
               <img
                 src={previewUrl}
                 alt="Analyzed Meal"
-                className="w-full max-h-72 object-cover block"
+                className="w-full h-full object-cover block"
               />
 
-              {/* Floating Pill Tags over the photo */}
-              <div className="absolute inset-0 p-4 flex flex-wrap content-end gap-2 bg-gradient-to-t from-black/60 via-black/20 to-transparent">
+              {/* Viewfinder Reticle Corners */}
+              <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-white/80 rounded-tl pointer-events-none" />
+              <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-white/80 rounded-tr pointer-events-none" />
+              <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-white/80 rounded-bl pointer-events-none" />
+              <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-white/80 rounded-br pointer-events-none" />
+
+              {/* Laser Scanning Grid Line Overlay */}
+              <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent pointer-events-none animate-laser-scan shadow-[0_0_12px_#34d399]" />
+
+              {/* Floating Pill Tags over the photo with glassmorphic cards */}
+              <div className="absolute inset-0 p-4 flex flex-wrap content-end gap-2.5 bg-gradient-to-t from-black/80 via-black/30 to-transparent">
                 {detectedTags.map((dish, idx) => (
                   <button
                     key={idx}
                     onClick={handleProceedToReview}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-fresh-surface text-fresh-text border border-fresh-border shadow-soft transition hover:scale-105 active:scale-95"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-semibold backdrop-blur-md bg-white/85 text-zinc-900 border border-white/60 shadow-lg transition hover:scale-105 active:scale-95"
                     title={`Tap to edit ${dish.detected_name}`}
                   >
-                    <Tag className="w-3 h-3 text-fresh-primary" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     <span>{dish.detected_name}</span>
-                    <span className="text-fresh-muted text-[10px] tabular-nums">({dish.grams}g)</span>
+                    <span className="px-1.5 py-0.5 rounded-full bg-black/10 text-[10px] tabular-nums font-bold">
+                      {dish.kcal ? `${Math.round(dish.kcal)} kcal` : `${dish.grams}g`}
+                    </span>
                   </button>
                 ))}
               </div>
@@ -177,25 +188,26 @@ export const ImageInput: React.FC<ImageInputProps> = ({
 
             <div className="flex items-center justify-between gap-3 pt-1">
               <p className="text-xs text-fresh-muted">
-                <strong>{detectedTags.length} dishes detected</strong>. Tap any item or proceed to review portions.
+                <strong className="text-fresh-text">{detectedTags.length} dishes detected</strong>. Tap any item to inspect nutritional facts.
               </p>
               <button
                 onClick={handleProceedToReview}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-btn bg-fresh-primary hover:opacity-90 active:scale-[0.98] text-fresh-on-primary font-medium text-xs shadow-soft transition"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-fresh-primary hover:opacity-90 active:scale-[0.98] text-fresh-on-primary font-semibold text-xs shadow-md transition"
               >
+                <Sparkles className="w-3.5 h-3.5" />
                 <span>Review & Save Meal</span>
               </button>
             </div>
           </div>
         ) : (
-          /* Circular Plate-Guide Frame Dropzone */
+          /* Viewfinder Camera Dropzone (Styled like Modern Smartphone Calorie Scanner) */
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             onClick={() => !isLoading && fileInputRef.current?.click()}
-            className={`relative rounded-card p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200 border border-fresh-border bg-fresh-surface ${
-              isDragging ? 'ring-2 ring-fresh-primary bg-fresh-primary-soft' : 'hover:border-fresh-primary'
+            className={`relative rounded-3xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 border border-fresh-border bg-gradient-to-b from-fresh-surface to-fresh-surface-alt/50 shadow-soft hover:shadow-soft-lg ${
+              isDragging ? 'ring-2 ring-emerald-500 bg-emerald-500/10' : 'hover:border-fresh-primary'
             }`}
           >
             {/* Standard File Picker */}
@@ -220,35 +232,40 @@ export const ImageInput: React.FC<ImageInputProps> = ({
             />
 
             {isLoading ? (
-              /* Skeleton Loader in surface-alt instead of spinner */
-              <div className="w-full py-6 flex flex-col items-center space-y-4">
-                <div className="w-48 h-48 rounded-full bg-fresh-surface-alt animate-pulse border-2 border-dashed border-fresh-border flex items-center justify-center shadow-plate">
-                  <div className="w-36 h-36 rounded-full bg-fresh-surface/60 border border-fresh-border flex items-center justify-center">
-                    <Sparkles className="w-8 h-8 text-fresh-primary animate-pulse" />
+              /* Laser Scanning Radar Loader */
+              <div className="w-full py-8 flex flex-col items-center space-y-4">
+                <div className="relative w-48 h-48 rounded-full border-2 border-dashed border-fresh-primary/60 flex items-center justify-center shadow-lg bg-fresh-surface">
+                  <div className="absolute inset-0 rounded-full border-t-2 border-emerald-500 animate-spin" />
+                  <div className="w-36 h-36 rounded-full bg-fresh-primary-soft/50 border border-fresh-border flex items-center justify-center">
+                    <Sparkles className="w-10 h-10 text-fresh-primary animate-pulse" />
                   </div>
                 </div>
                 <div className="space-y-1.5 text-center">
-                  <div className="h-4 w-40 bg-fresh-surface-alt rounded-btn animate-pulse mx-auto" />
-                  <p className="font-display font-medium text-sm text-fresh-text">{loadingStep}</p>
-                  <p className="text-xs text-fresh-muted">Estimating portions and nutritional balance...</p>
+                  <p className="font-display font-semibold text-base text-fresh-text">{loadingStep}</p>
+                  <p className="text-xs text-fresh-muted">AI is analyzing food geometry & macros...</p>
                 </div>
               </div>
             ) : (
-              <div className="py-2 flex flex-col items-center space-y-4 w-full">
-                {/* Circular Plate-Guide Frame */}
-                <div className="relative w-52 h-52 rounded-full border-2 border-dashed border-fresh-primary/40 flex flex-col items-center justify-center bg-fresh-surface-alt/50 p-4 transition shadow-plate hover:border-fresh-primary hover:scale-[1.01]">
-                  {/* Inner subtle concentric ceramic rim */}
-                  <div className="absolute inset-2.5 rounded-full border border-dashed border-fresh-border pointer-events-none" />
-                  <div className="absolute inset-5 rounded-full border border-fresh-primary/10 pointer-events-none" />
+              <div className="py-3 flex flex-col items-center space-y-4 w-full">
+                {/* Modern Smartphone Scanner Viewfinder Frame */}
+                <div className="relative w-56 h-56 rounded-3xl border border-fresh-border flex flex-col items-center justify-center bg-fresh-surface p-4 transition shadow-md hover:border-fresh-primary hover:scale-[1.01] overflow-hidden group">
+                  {/* Viewfinder Target Corners */}
+                  <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-fresh-primary rounded-tl" />
+                  <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-fresh-primary rounded-tr" />
+                  <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-fresh-primary rounded-bl" />
+                  <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-fresh-primary rounded-br" />
 
-                  <div className="w-11 h-11 rounded-full bg-fresh-primary-soft text-fresh-primary flex items-center justify-center mb-2 shadow-soft">
-                    <Utensils className="w-5 h-5" />
+                  {/* Gentle scanning line preview */}
+                  <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent" />
+
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-2 shadow-sm group-hover:scale-110 transition-transform">
+                    <Utensils className="w-6 h-6" />
                   </div>
                   <span className="font-display font-medium text-sm text-fresh-text">
-                    Plate Guide Frame
+                    Smart AI Lens Frame
                   </span>
-                  <span className="text-[11px] text-fresh-muted mt-0.5 max-w-[140px] text-center leading-tight">
-                    Center your plate or bowl inside the circle
+                  <span className="text-[11px] text-fresh-muted mt-1 max-w-[150px] text-center leading-tight">
+                    Center dish, bowl, or snack inside the viewfinder
                   </span>
                 </div>
 
@@ -263,11 +280,10 @@ export const ImageInput: React.FC<ImageInputProps> = ({
                       if (captured) {
                         handleProcessFile(captured.file);
                       } else {
-                        // Fallback on web browser to camera trigger
                         cameraInputRef.current?.click();
                       }
                     }}
-                    className="flex-1 py-2.5 px-3 rounded-btn bg-fresh-primary text-fresh-on-primary font-medium text-xs flex items-center justify-center gap-1.5 shadow-soft hover:opacity-90 active:scale-95 transition"
+                    className="flex-1 py-3 px-4 rounded-full bg-fresh-primary text-fresh-on-primary font-semibold text-xs flex items-center justify-center gap-2 shadow-md hover:opacity-90 active:scale-95 transition"
                   >
                     <Camera className="w-4 h-4" />
                     <span>Take Photo</span>
@@ -279,14 +295,14 @@ export const ImageInput: React.FC<ImageInputProps> = ({
                       e.stopPropagation();
                       fileInputRef.current?.click();
                     }}
-                    className="flex-1 py-2.5 px-3 rounded-btn bg-fresh-surface-alt border border-fresh-border text-fresh-text font-medium text-xs flex items-center justify-center gap-1.5 hover:bg-fresh-surface active:scale-95 transition"
+                    className="flex-1 py-3 px-4 rounded-full bg-fresh-surface border border-fresh-border text-fresh-text font-semibold text-xs flex items-center justify-center gap-2 hover:bg-fresh-surface-alt active:scale-95 transition shadow-sm"
                   >
-                    <span>Browse Files</span>
+                    <span>Browse Gallery</span>
                   </button>
                 </div>
 
-                <div className="text-center pt-1">
-                  <p className="text-[11px] text-fresh-muted">Tap "Take Photo" or choose from your gallery</p>
+                <div className="text-center pt-0.5">
+                  <p className="text-[11px] text-fresh-muted font-medium">Automatic recognition powered by Gemini Vision</p>
                 </div>
               </div>
             )}
