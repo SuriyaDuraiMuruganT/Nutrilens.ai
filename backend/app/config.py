@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:////data/nutrilens.db"
     STORAGE_DIR: str = "/data/uploads"
 
-    VISION_PROVIDER: str = "mock"  # mock | gemini | claude | openai
+    VISION_PROVIDER: str = "gemini"  # mock | gemini | claude | openai
     GEMINI_API_KEY: str = ""
     OPENAI_API_KEY: str = ""
     ANTHROPIC_API_KEY: str = ""

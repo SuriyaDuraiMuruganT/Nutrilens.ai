@@ -37,6 +37,7 @@ ENV STORAGE_DIR=/app/uploads
 ENV DATABASE_URL=sqlite:////app/nutrilens.db
 ENV ENV=production
 ENV PORT=8000
+ENV VISION_PROVIDER=gemini
 
 # Expose port (overridden dynamically by cloud platforms via $PORT)
 EXPOSE 8000

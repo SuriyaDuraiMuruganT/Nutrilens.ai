@@ -256,10 +256,12 @@ class GeminiVisionProvider(VisionProvider):
             "8. If the image contains absolutely NO food or beverage whatsoever (e.g. vehicle, furniture, blank screen, animal), set is_food to false with empty items list. Otherwise, set is_food to true."
         )
 
-        # Active supported models for Gemini API
+        # Active supported models for Gemini API (ordered by availability & reliability)
         models_to_try = [
-            "gemini-flash-lite-latest",
+            "gemini-3-flash-preview",
             "gemini-flash-latest",
+            "gemini-flash-lite-latest",
+            "gemini-3.8-flash",
         ]
         last_error = None
 
