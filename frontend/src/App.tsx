@@ -117,10 +117,10 @@ export function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6 overflow-hidden">
         {/* Calo-Inspired Week Day Bar (Sat, Sun, Mon... Today) */}
-        <div className="bg-fresh-surface rounded-2xl p-3 border border-fresh-border shadow-soft flex items-center justify-between gap-2 overflow-x-auto">
-          <div className="flex items-center gap-1.5 sm:gap-2">
+        <div className="bg-fresh-surface rounded-2xl p-2.5 sm:p-3 border border-fresh-border shadow-soft flex items-center justify-between gap-2 overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
             {[-3, -2, -1, 0, 1, 2, 3].map((offset) => {
               const d = new Date(selectedDate);
               d.setDate(d.getDate() + offset);
@@ -134,24 +134,24 @@ export function App() {
                 <button
                   key={offset}
                   onClick={() => setSelectedDate(iso)}
-                  className={`flex flex-col items-center justify-center min-w-[44px] py-1.5 px-2 rounded-2xl transition-all ${
+                  className={`flex flex-col items-center justify-center min-w-[40px] sm:min-w-[46px] py-1.5 px-1.5 rounded-2xl transition-all ${
                     isSelected
-                      ? 'bg-black text-white dark:bg-white dark:text-black shadow-md scale-105 font-bold'
+                      ? 'bg-blue-600 text-white shadow-md scale-105 font-bold'
                       : 'hover:bg-fresh-surface-alt text-fresh-muted hover:text-fresh-text'
                   }`}
                 >
-                  <span className="text-[10px] uppercase tracking-wider opacity-80">{isActualToday ? 'Today' : dayName}</span>
-                  <span className="text-sm font-semibold tabular-nums mt-0.5">{dayNum}</span>
-                  {isSelected && <span className="w-1 h-1 rounded-full bg-orange-400 mt-1" />}
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-wider opacity-80">{isActualToday ? 'Today' : dayName}</span>
+                  <span className="text-xs sm:text-sm font-semibold tabular-nums mt-0.5">{dayNum}</span>
+                  {isSelected && <span className="w-1 h-1 rounded-full bg-white mt-1" />}
                 </button>
               );
             })}
           </div>
 
-          <div className="flex items-center gap-2 pl-3 border-l border-fresh-border shrink-0">
+          <div className="flex items-center gap-1 sm:gap-2 pl-2 border-l border-fresh-border shrink-0">
             <button
               onClick={handlePrevDay}
-              className="p-2 text-fresh-muted hover:text-fresh-text hover:bg-fresh-surface-alt rounded-full transition border border-fresh-border/50"
+              className="p-1.5 text-fresh-muted hover:text-fresh-text hover:bg-fresh-surface-alt rounded-full transition border border-fresh-border/50"
               title="Previous Day"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -161,12 +161,12 @@ export function App() {
                 type="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
-                className="text-xs font-semibold px-3 py-1.5 rounded-full bg-fresh-surface-alt text-fresh-text border border-fresh-border outline-none cursor-pointer"
+                className="text-[11px] sm:text-xs font-semibold px-2 py-1 rounded-full bg-fresh-surface-alt text-fresh-text border border-fresh-border outline-none cursor-pointer max-w-[110px] sm:max-w-none"
               />
             </div>
             <button
               onClick={handleNextDay}
-              className="p-2 text-fresh-muted hover:text-fresh-text hover:bg-fresh-surface-alt rounded-full transition border border-fresh-border/50"
+              className="p-1.5 text-fresh-muted hover:text-fresh-text hover:bg-fresh-surface-alt rounded-full transition border border-fresh-border/50"
               title="Next Day"
             >
               <ChevronRight className="w-4 h-4" />
@@ -174,37 +174,36 @@ export function App() {
           </div>
         </div>
 
-        {/* Hero Section / Quiet Welcome Banner */}
-        <div className="rounded-card bg-fresh-surface p-6 sm:p-7 border border-fresh-border shadow-soft transition-colors">
-          <div className="max-w-3xl space-y-3">
+        {/* Hero Section / Welcome Banner - Word-wrapped and mobile-optimized */}
+        <div className="rounded-2xl bg-fresh-surface p-4 sm:p-6 border border-fresh-border shadow-soft transition-colors">
+          <div className="max-w-3xl space-y-2.5">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-fresh-primary-soft text-fresh-primary border border-fresh-primary/20">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
                 <Sparkles className="w-3.5 h-3.5" />
-                Fresh Table · Intelligent Food Analysis
+                Calo AI · Intelligent Nutrition Lens
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-display font-medium tracking-tight text-fresh-text">
-              Mindful Nourishment, Plate by Plate
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-fresh-text break-words">
+              Track Calories & Health, Plate by Plate
             </h1>
-            <p className="text-sm text-fresh-muted leading-relaxed font-sans">
-              NutriLens gently identifies dishes, estimates balanced portions, and calculates nutrition.
-              The UI stays quiet so your meals take center stage. Photo estimates can be off by 10–20%; tap any item to adjust.
+            <p className="text-xs sm:text-sm text-fresh-muted leading-relaxed font-sans break-words">
+              Snap any meal. Instant vision estimates portion weight, macros, and full nutritional facts with zero guesswork.
             </p>
 
-            <div className="pt-2 flex items-center gap-3 flex-wrap">
+            <div className="pt-1 flex items-center gap-2 sm:gap-3 flex-wrap">
               <button
                 onClick={() => setIsUploadOpen(true)}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-btn bg-fresh-primary hover:opacity-90 active:scale-[0.98] text-fresh-on-primary font-medium text-sm shadow-soft transition"
+                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold text-xs sm:text-sm shadow-md transition"
               >
                 <Camera className="w-4 h-4" />
-                <span>Log a Meal</span>
+                <span>Snap Meal</span>
               </button>
               <button
                 onClick={() => setIsProfileOpen(true)}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-btn bg-fresh-primary-soft hover:opacity-80 text-fresh-primary font-medium text-sm transition border border-fresh-border"
+                className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-full bg-fresh-surface-alt hover:opacity-80 text-fresh-text font-medium text-xs sm:text-sm transition border border-fresh-border"
               >
-                <span>Edit Nutrition Goals</span>
+                <span>Edit Goals</span>
               </button>
             </div>
           </div>

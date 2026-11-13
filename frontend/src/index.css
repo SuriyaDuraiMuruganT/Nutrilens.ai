@@ -4,65 +4,70 @@
 
 @layer base {
   :root {
-    /* Light Mode: "Fresh Table" */
-    --color-bg: 250 247 242;          /* #FAF7F2 (warm paper) */
-    --color-surface: 255 255 255;     /* #FFFFFF */
-    --color-surface-alt: 243 238 230; /* #F3EEE6 */
-    --color-border: 232 225 214;      /* #E8E1D6 */
-    --color-text: 38 35 31;           /* #26231F */
-    --color-text-muted: 111 103 92;   /* #6F675C */
-    --color-primary: 79 122 83;       /* #4F7A53 (sage) */
-    --color-primary-soft: 228 239 226;/* #E4EFE2 */
+    /* Pure Modern Airy Theme (Inspired by Calo AI & Foodvisor) */
+    --color-bg: 246 248 250;          /* #F6F8FA crisp light airy background */
+    --color-surface: 255 255 255;     /* #FFFFFF pure clean card white */
+    --color-surface-alt: 240 243 246; /* #F0F3F6 soft neutral pill background */
+    --color-border: 228 232 237;      /* #E4E8ED subtle crisp border */
+    --color-text: 15 23 42;           /* #0F172A deep dark readable slate text */
+    --color-text-muted: 100 116 139;  /* #64748B elegant slate muted */
+    --color-primary: 37 99 235;       /* #2563EB vibrant electric blue */
+    --color-primary-soft: 239 246 255;/* #EFF6FF soft blue tint */
     --color-on-primary: 255 255 255;  /* #FFFFFF */
-    --color-warning: 201 74 52;       /* #C94A34 (tomato) */
-    --color-warning-soft: 251 233 228;/* #FBE9E4 */
-    --color-success: 79 122 83;       /* #4F7A53 */
-    --color-info: 107 143 163;        /* #6B8FA3 */
-    --color-accent: 242 166 90;       /* #F2A65A */
+    --color-warning: 239 68 68;       /* #EF4444 vivid coral red */
+    --color-warning-soft: 254 242 242;/* #FEF2F2 */
+    --color-success: 16 185 129;      /* #10B981 emerald success */
+    --color-info: 59 130 246;         /* #3B82F6 */
+    --color-accent: 249 115 22;       /* #F97316 warm orange flame */
 
-    /* Nutrient Colors (Light Mode) */
-    --nutrient-calories-from: #F2A65A;
-    --nutrient-calories-to: #F7C99B;
-    --nutrient-protein: #6FA287;
-    --nutrient-carbs: #E5B96A;
-    --nutrient-fat: #E58B73;
-    --nutrient-fiber: #9A7BB0;
-    --nutrient-sugar: #B57F97;
-    --nutrient-sodium: #6B8FA3;
+    /* Nutrient Colors (Vibrant Clean Calo & Foodvisor palette) */
+    --nutrient-calories-from: #F97316;
+    --nutrient-calories-to: #F59E0B;
+    --nutrient-protein: #EF4444;       /* Vivid Coral/Red */
+    --nutrient-carbs: #F59E0B;         /* Warm Gold/Amber */
+    --nutrient-fat: #0EA5E9;           /* Clean Sky Blue */
+    --nutrient-fiber: #10B981;         /* Emerald */
+    --nutrient-sugar: #EC4899;         /* Pink */
+    --nutrient-sodium: #6366F1;        /* Indigo */
   }
 
   .dark {
-    /* Dark Mode: "Evening Table" */
-    --color-bg: 27 25 22;             /* #1B1916 */
-    --color-surface: 37 34 30;        /* #25221E */
-    --color-surface-alt: 47 43 38;    /* #2F2B26 */
-    --color-border: 58 53 47;         /* #3A352F */
-    --color-text: 243 238 230;        /* #F3EEE6 */
-    --color-text-muted: 178 169 155;  /* #B2A99B */
-    --color-primary: 143 191 146;     /* #8FBF92 */
-    --color-primary-soft: 42 58 44;   /* #2A3A2C */
-    --color-on-primary: 20 35 26;     /* #14231A */
-    --color-accent: 242 178 122;      /* #F2B27A */
-    --color-warning: 232 128 107;     /* #E8806B */
-    --color-warning-soft: 61 38 34;   /* #3D2622 */
-    --color-success: 143 191 146;     /* #8FBF92 */
-    --color-info: 138 176 197;        /* #8AB0C5 */
+    /* Modern OLED Dark Theme */
+    --color-bg: 11 15 25;             /* #0B0F19 deep night black */
+    --color-surface: 20 26 38;        /* #141A26 clean card surface */
+    --color-surface-alt: 30 38 54;    /* #1E2636 soft contrast surface */
+    --color-border: 38 48 68;         /* #263044 */
+    --color-text: 248 250 252;        /* #F8FAFC bright white text */
+    --color-text-muted: 148 163 184;  /* #94A3B8 */
+    --color-primary: 59 130 246;      /* #3B82F6 */
+    --color-primary-soft: 29 45 74;   /* #1D2D4A */
+    --color-on-primary: 255 255 255;  /* #FFFFFF */
+    --color-accent: 251 146 60;       /* #FB923C */
+    --color-warning: 248 113 113;     /* #F87171 */
+    --color-warning-soft: 54 26 26;   /* #361A1A */
+    --color-success: 52 211 153;      /* #34D399 */
+    --color-info: 96 165 250;         /* #60A5FA */
 
-    /* Nutrient Colors (Evening Table - slightly brightened ~10%) */
-    --nutrient-calories-from: #F5B876;
-    --nutrient-calories-to: #F9D5AF;
-    --nutrient-protein: #7EB59A;
-    --nutrient-carbs: #ECC780;
-    --nutrient-fat: #EB9C86;
-    --nutrient-fiber: #AB8EC1;
-    --nutrient-sugar: #C795AB;
-    --nutrient-sodium: #8AB0C5;
+    /* Nutrient Colors (Dark Mode) */
+    --nutrient-calories-from: #FB923C;
+    --nutrient-calories-to: #FBBF24;
+    --nutrient-protein: #F87171;
+    --nutrient-carbs: #FBBF24;
+    --nutrient-fat: #38BDF8;
+    --nutrient-fiber: #34D399;
+    --nutrient-sugar: #F472B6;
+    --nutrient-sodium: #818CF8;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   body {
     background-color: rgb(var(--color-bg));
     color: rgb(var(--color-text));
-    font-family: 'Inter', 'Noto Sans', system-ui, -apple-system, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
     -webkit-tap-highlight-color: transparent;
     transition: background-color 200ms ease, color 200ms ease;
   }

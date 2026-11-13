@@ -46,17 +46,17 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo & Brand */}
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-fresh-primary text-fresh-on-primary flex items-center justify-center shadow-soft">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center shadow-md">
               <Utensils className="w-4 h-4" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="font-display font-medium text-xl tracking-tight text-fresh-text">
+              <div className="flex items-center gap-1.5">
+                <span className="font-bold text-lg tracking-tight text-fresh-text">
                   NutriLens
                 </span>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-fresh-primary-soft text-fresh-primary border border-fresh-border">
-                  Fresh Table
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                  AI Lens
                 </span>
               </div>
               <p className="text-[11px] text-fresh-muted hidden sm:block">
