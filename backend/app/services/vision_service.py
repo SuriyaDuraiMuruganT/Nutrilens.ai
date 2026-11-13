@@ -237,14 +237,20 @@ class GeminiVisionProvider(VisionProvider):
         prompt = (
             "You are an expert AI clinical nutritionist and culinary biochemist with comprehensive global food and beverage intelligence. "
             "Examine this food/meal/beverage image in detail and analyze everything based on your extensive knowledge: "
-            "1. Detect EVERY separate food dish, beverage, drink, bread, curry, gravy, side, snack, fruit, or item visible in the image. "
-            "2. Identify specific food/drink names accurately (e.g. 'Cappuccino', 'Filter Coffee', 'Avocado Toast with Poached Egg', 'Chicken Biryani', 'Margherita Pizza Slice', 'Greek Yogurt with Berries', 'Dal Tadka', 'Chapati'). "
-            "3. Accurately estimate portion quantity in grams/milliliters by analyzing visible vessels, cups, plates, and depth (e.g., coffee cup ~200ml, mug ~300ml, standard plate ~350g, bowl ~150-180g, slice ~100g) and write a descriptive serving description. "
-            "4. Calculate and predict the exact nutritional values for this specific estimated portion: kcal (calories), protein (g), fat (g), carbs (g), fiber (g), sugar (g), and sodium (mg). "
-            "5. Provide the reference nutritional properties per 100g for this item: kcal_per_100g, protein_per_100g, fat_per_100g, carbs_per_100g, fiber_per_100g, sugar_per_100g, and sodium_mg_per_100g. "
-            "6. In health_notes, provide key dietary and biochemical properties (e.g. 'Rich in polyphenols and moderate lactose', 'High lean protein, low glycemic index', 'High dietary fiber, complex carbs'). "
+            "1. Detect EVERY separate food dish, beverage, drink, bread, curry, gravy, side, snack, fruit, toffee, candy, or item visible in the image. "
+            "2. Identify specific food/drink names accurately (e.g. 'Alpenliebe Cream Strawberry Toffee', 'Butter Chicken', 'Cappuccino', 'Avocado Toast with Poached Egg', 'Chicken Biryani', 'Margherita Pizza Slice', 'Greek Yogurt with Berries', 'Dal Tadka', 'Chapati'). "
+            "3. Accurately estimate portion quantity in grams/milliliters by analyzing visible vessels, wrappers, pieces, cups, plates, and depth and write a descriptive serving description (e.g. '1 stick (36g)', '1 cup (~240g serving)', '2 whole wheat rotis'). "
+            "4. Calculate and predict nutritional values for this specific food: "
+            "   - Base nutrients: kcal, protein (g), fat (g), carbs (g), fiber (g), sugar (g), sodium (mg). "
+            "   - Granular facts ONLY where relevant to the specific food: "
+            "     * added_sugars (g): For candies, toffees, sodas, desserts, sweetened drinks, processed sweets (e.g. 69g/100g in strawberry toffee). If non-sweet or unadded (like plain chicken), set to 0. "
+            "     * saturated_fat (g): For dairy, butter, curries, red meat, coconut, cheese, pastries (e.g. ~15g in butter chicken, 7.9g/100g in cream toffee). "
+            "     * trans_fat (g): For commercially fried foods, hydrogenated oils, bakery items (e.g. 0.06g). "
+            "     * cholesterol (mg): For poultry, meat, dairy, eggs, butter (e.g. ~107mg for butter chicken, 2mg for milk-candy). If vegan/plant food, set to 0. "
+            "5. Provide the reference nutritional properties per 100g: kcal_per_100g, protein_per_100g, fat_per_100g, carbs_per_100g, fiber_per_100g, sugar_per_100g, added_sugars_per_100g, saturated_fat_per_100g, trans_fat_per_100g, cholesterol_mg_per_100g, sodium_mg_per_100g. "
+            "6. In health_notes, provide key dietary and biochemical properties (e.g. 'High sugar candy · Low protein', 'High saturated fat & protein · Rich in sodium & cholesterol'). "
             "7. Assign a confidence score between 0.0 and 1.0 for each detected item. "
-            "8. If the image contains absolutely NO food or beverage whatsoever (e.g. vehicle, furniture, blank screen, animal), set is_food to false with empty items list. Otherwise, set is_food to true."
+            "8. If the image contains absolutely NO food or beverage whatsoever, set is_food to false with empty items list."
         )
 
         # Active supported models for Gemini API (fastest, most reliable first)

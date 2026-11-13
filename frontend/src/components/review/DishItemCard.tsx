@@ -237,13 +237,59 @@ export const DishItemCard: React.FC<DishItemCardProps> = ({ item, onUpdate, onDe
             <Droplet className="w-3 h-3" />
             <strong className="font-semibold tabular-nums">{item.fat}g</strong> Fat
           </span>
-          <span className="text-fresh-border">·</span>
-          <span className="flex items-center gap-1 text-[var(--nutrient-fiber)]">
-            <Leaf className="w-3 h-3" />
-            <strong className="font-semibold tabular-nums">{item.fiber}g</strong> Fiber
-          </span>
+          {item.fiber > 0 && (
+            <>
+              <span className="text-fresh-border">·</span>
+              <span className="flex items-center gap-1 text-[var(--nutrient-fiber)]">
+                <Leaf className="w-3 h-3" />
+                <strong className="font-semibold tabular-nums">{item.fiber}g</strong> Fiber
+              </span>
+            </>
+          )}
         </div>
       </div>
+
+      {/* Food-Specific Nutrition Facts (Only displays facts this food actually contains) */}
+      {((item.sugar && item.sugar > 0) ||
+        (item.added_sugars && item.added_sugars > 0) ||
+        (item.saturated_fat && item.saturated_fat > 0) ||
+        (item.trans_fat && item.trans_fat > 0) ||
+        (item.cholesterol && item.cholesterol > 0) ||
+        (item.sodium && item.sodium > 0)) && (
+        <div className="mt-2.5 pt-2 border-t border-dashed border-fresh-border/80 flex items-center flex-wrap gap-1.5 text-[10px]">
+          <span className="text-fresh-muted uppercase tracking-wider font-semibold mr-1">Food Facts:</span>
+          {item.sugar !== undefined && item.sugar > 0 && (
+            <span className="px-2 py-0.5 rounded-full bg-fresh-surface-alt border border-fresh-border text-fresh-text">
+              Sugar: <strong className="font-medium text-fresh-primary">{item.sugar}g</strong>
+            </span>
+          )}
+          {item.added_sugars !== undefined && item.added_sugars !== null && item.added_sugars > 0 && (
+            <span className="px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+              Added Sugars: <strong className="font-medium">{item.added_sugars}g</strong>
+            </span>
+          )}
+          {item.saturated_fat !== undefined && item.saturated_fat !== null && item.saturated_fat > 0 && (
+            <span className="px-2 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-600 dark:text-orange-400">
+              Sat Fat: <strong className="font-medium">{item.saturated_fat}g</strong>
+            </span>
+          )}
+          {item.trans_fat !== undefined && item.trans_fat !== null && item.trans_fat > 0 && (
+            <span className="px-2 py-0.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400">
+              Trans Fat: <strong className="font-medium">{item.trans_fat}g</strong>
+            </span>
+          )}
+          {item.cholesterol !== undefined && item.cholesterol !== null && item.cholesterol > 0 && (
+            <span className="px-2 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-600 dark:text-blue-400">
+              Cholesterol: <strong className="font-medium">{item.cholesterol}mg</strong>
+            </span>
+          )}
+          {item.sodium !== undefined && item.sodium > 0 && (
+            <span className="px-2 py-0.5 rounded-full bg-fresh-surface-alt border border-fresh-border text-fresh-text">
+              Sodium: <strong className="font-medium">{item.sodium}mg</strong>
+            </span>
+          )}
+        </div>
+      )}
     </div>
   );
 };

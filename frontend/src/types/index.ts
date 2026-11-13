@@ -31,6 +31,10 @@ export interface MealItem {
   fiber: number;
   sugar?: number;
   sodium?: number;
+  added_sugars?: number | null;
+  saturated_fat?: number | null;
+  trans_fat?: number | null;
+  cholesterol?: number | null;
   food?: FoodItem | null;
 }
 

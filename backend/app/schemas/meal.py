@@ -12,6 +12,10 @@ class MealItemBase(BaseModel):
     confidence: float = Field(default=0.9, ge=0.0, le=1.0)
     user_edited: bool = False
     has_extra_oil: bool = False
+    added_sugars: Optional[float] = None
+    saturated_fat: Optional[float] = None
+    trans_fat: Optional[float] = None
+    cholesterol: Optional[float] = None
 
 
 class MealItemCreate(MealItemBase):
@@ -22,6 +26,10 @@ class MealItemCreate(MealItemBase):
     fiber: Optional[float] = None
     sugar: Optional[float] = 0.0
     sodium: Optional[float] = 0.0
+    added_sugars: Optional[float] = None
+    saturated_fat: Optional[float] = None
+    trans_fat: Optional[float] = None
+    cholesterol: Optional[float] = None
 
 
 class MealItemResponse(MealItemBase):
@@ -34,6 +42,10 @@ class MealItemResponse(MealItemBase):
     fiber: float
     sugar: float = 0.0
     sodium: float = 0.0
+    added_sugars: Optional[float] = None
+    saturated_fat: Optional[float] = None
+    trans_fat: Optional[float] = None
+    cholesterol: Optional[float] = None
     food: Optional[FoodResponse] = None
 
     model_config = ConfigDict(from_attributes=True)

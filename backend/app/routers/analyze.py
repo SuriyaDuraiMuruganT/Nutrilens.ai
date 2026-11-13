@@ -261,6 +261,31 @@ async def analyze_meal_image(
             sodium_mg_per_100g = 50.0
             sodium = sodium_mg_per_100g * ratio
 
+        # Granular nutrient facts (only present if food actually contains them)
+        added_sugars = None
+        if getattr(item, "added_sugars", None) is not None:
+            added_sugars = round(max(0.0, float(item.added_sugars)), 1)
+        elif getattr(item, "added_sugars_per_100g", None) is not None:
+            added_sugars = round(max(0.0, float(item.added_sugars_per_100g) * ratio), 1)
+
+        saturated_fat = None
+        if getattr(item, "saturated_fat", None) is not None:
+            saturated_fat = round(max(0.0, float(item.saturated_fat)), 1)
+        elif getattr(item, "saturated_fat_per_100g", None) is not None:
+            saturated_fat = round(max(0.0, float(item.saturated_fat_per_100g) * ratio), 1)
+
+        trans_fat = None
+        if getattr(item, "trans_fat", None) is not None:
+            trans_fat = round(max(0.0, float(item.trans_fat)), 2)
+        elif getattr(item, "trans_fat_per_100g", None) is not None:
+            trans_fat = round(max(0.0, float(item.trans_fat_per_100g) * ratio), 2)
+
+        cholesterol = None
+        if getattr(item, "cholesterol", None) is not None:
+            cholesterol = round(max(0.0, float(item.cholesterol)), 1)
+        elif getattr(item, "cholesterol_mg_per_100g", None) is not None:
+            cholesterol = round(max(0.0, float(item.cholesterol_mg_per_100g) * ratio), 1)
+
         nutrients = {
             "kcal": round(max(0.0, kcal), 1),
             "protein": round(max(0.0, protein), 1),
@@ -331,6 +356,10 @@ async def analyze_meal_image(
                 fiber=nutrients["fiber"],
                 sugar=nutrients["sugar"],
                 sodium=nutrients["sodium"],
+                added_sugars=added_sugars,
+                saturated_fat=saturated_fat,
+                trans_fat=trans_fat,
+                cholesterol=cholesterol,
                 food=food_resp
             )
         )
