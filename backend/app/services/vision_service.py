@@ -221,24 +221,15 @@ class GeminiVisionProvider(VisionProvider):
 
         client = genai.Client(api_key=self.api_key.strip())
 
-        # Compress and resize high-resolution images to max 1280px for 5-10x faster Gemini inference
+        # Always downsample high-resolution mobile photos to max 800px for lightning-fast Gemini inference
         try:
             with Image.open(io.BytesIO(image_bytes)) as pil_img:
-                if max(pil_img.size) > 1280 or len(image_bytes) > 800 * 1024:
-                    pil_img = pil_img.convert("RGB")
-                    pil_img.thumbnail((1280, 1280), Image.Resampling.LANCZOS)
-                    compressed_buf = io.BytesIO()
-                    pil_img.save(compressed_buf, format="JPEG", quality=85)
-                    image_bytes = compressed_buf.getvalue()
-                    mime_type = "image/jpeg"
-                else:
-                    # Detect mime type from original bytes
-                    if image_bytes.startswith(b"\x89PNG\r\n\x1a\n"):
-                        mime_type = "image/png"
-                    elif image_bytes.startswith(b"RIFF") and b"WEBP" in image_bytes[:16]:
-                        mime_type = "image/webp"
-                    else:
-                        mime_type = "image/jpeg"
+                pil_img = pil_img.convert("RGB")
+                pil_img.thumbnail((800, 800), Image.Resampling.LANCZOS)
+                compressed_buf = io.BytesIO()
+                pil_img.save(compressed_buf, format="JPEG", quality=82)
+                image_bytes = compressed_buf.getvalue()
+                mime_type = "image/jpeg"
         except Exception as e:
             logger.warning(f"Image preprocessing warning: {e}")
             mime_type = "image/jpeg"
@@ -285,7 +276,7 @@ class GeminiVisionProvider(VisionProvider):
                         )
                     )
 
-                response = await asyncio.wait_for(asyncio.to_thread(_generate), timeout=25.0)
+                response = await asyncio.wait_for(asyncio.to_thread(_generate), timeout=60.0)
 
                 if response.text:
                     parsed_json = json.loads(response.text)
@@ -293,14 +284,18 @@ class GeminiVisionProvider(VisionProvider):
                     logger.info(f"Gemini analysis successful ({model_name}): {len(validated.items)} items detected.")
                     return validated
             except asyncio.TimeoutError:
-                logger.warning(f"Gemini model {model_name} timed out after 25s. Trying next candidate...")
-                last_error = TimeoutError(f"Model {model_name} timed out")
+                logger.warning(f"Gemini model {model_name} timed out after 60s. Trying next candidate...")
+                last_error = TimeoutError(f"Model {model_name} timed out after 60s")
             except Exception as e:
                 logger.warning(f"Gemini model {model_name} failed: {e}")
                 last_error = e
 
-        # If all Gemini models fail, fall back to smart MockVisionProvider with visual color analysis
-        logger.warning(f"All Gemini models failed ({last_error}). Falling back to visual heuristics.")
+        # If strict Gemini mode is active and Gemini failed, raise error with details
+        logger.error(f"All Gemini models failed ({last_error}).")
+        if settings.VISION_PROVIDER == "gemini":
+            raise RuntimeError(f"Gemini Vision recognition error: {last_error}")
+
+        # Fallback to mock only if configured
         mock = MockVisionProvider()
         return await mock.analyze_image(image_bytes, filename, hint)
 
