@@ -1,0 +1,28 @@
+# Environments & Virtualenvs
+venv/
+.env
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Node & Frontend
+node_modules/
+dist/
+.DS_Store
+
+# Android & Capacitor builds
+frontend/android/app/build/
+frontend/android/.gradle/
+*.apk
+
+# IDE & Caches
+.idea/
+.vscode/
+
+# Local uploads & DB
+backend/uploads/*
+!backend/uploads/.gitkeep
+nutrilens.db
+backend/nutrilens.db
+
