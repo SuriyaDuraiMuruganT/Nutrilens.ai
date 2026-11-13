@@ -7,7 +7,7 @@ export const getBaseUrl = () => {
   if (customUrl && customUrl.trim()) return customUrl.trim();
   if (import.meta.env.VITE_API_URL) return import.meta.env.VITE_API_URL;
   if (Capacitor.isNativePlatform()) {
-    return 'http://10.50.6.248:8000';
+    return 'https://nutrilens-app-production.up.railway.app';
   }
   return '';
 };
