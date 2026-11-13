@@ -36,7 +36,12 @@ export const ProfileGoalsModal: React.FC<ProfileGoalsModalProps> = ({ onClose, o
   });
 
   const [serverUrl, setServerUrl] = useState(() => {
-    return localStorage.getItem('nutrilens_server_url') || 'https://nutrilens-app-production.up.railway.app';
+    const saved = localStorage.getItem('nutrilens_server_url');
+    if (saved && (saved.includes('10.50.') || saved.includes('192.168.') || saved.includes('localhost'))) {
+      localStorage.removeItem('nutrilens_server_url');
+      return 'https://nutrilens-app-production.up.railway.app';
+    }
+    return saved || 'https://nutrilens-app-production.up.railway.app';
   });
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);

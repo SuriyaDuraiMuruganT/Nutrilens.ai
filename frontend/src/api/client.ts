@@ -4,7 +4,15 @@ import { Capacitor } from '@capacitor/core';
 // In native mobile app, point directly to your backend host; in browser, use relative URL or env
 export const getBaseUrl = () => {
   const customUrl = localStorage.getItem('nutrilens_server_url');
-  if (customUrl && customUrl.trim()) return customUrl.trim();
+  if (customUrl && customUrl.trim()) {
+    const trimmed = customUrl.trim();
+    // Auto-migrate away from old local Wi-Fi private IP
+    if (trimmed.includes('10.50.') || trimmed.includes('192.168.') || (trimmed.includes('localhost') && Capacitor.isNativePlatform())) {
+      localStorage.removeItem('nutrilens_server_url');
+    } else {
+      return trimmed;
+    }
+  }
   if (import.meta.env.VITE_API_URL) return import.meta.env.VITE_API_URL;
   if (Capacitor.isNativePlatform()) {
     return 'https://nutrilens-app-production.up.railway.app';

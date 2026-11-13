@@ -126,11 +126,15 @@ async def analyze_meal_image(
     effective_api_key = x_gemini_key or settings.GEMINI_API_KEY
     active_vision = get_vision_provider(api_key=effective_api_key)
 
-    analysis = await active_vision.analyze_image(
-        image_bytes=image_bytes,
-        filename=file.filename,
-        hint=hint
-    )
+    try:
+        analysis = await active_vision.analyze_image(
+            image_bytes=image_bytes,
+            filename=file.filename,
+            hint=hint
+        )
+    except Exception as e:
+        logger.exception(f"Vision analysis failed: {e}")
+        raise HTTPException(status_code=500, detail=f"Vision analysis failed: {str(e)}")
 
     meal_type = get_default_meal_type()
 
