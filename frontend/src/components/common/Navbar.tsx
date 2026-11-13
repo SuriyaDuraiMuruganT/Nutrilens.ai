@@ -47,7 +47,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center justify-between h-16">
           {/* Logo & Brand */}
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center shadow-md">
+            <div className="w-9 h-9 rounded-2xl bg-fresh-primary text-fresh-on-primary flex items-center justify-center shadow-md">
               <Utensils className="w-4 h-4" />
             </div>
             <div>
@@ -55,12 +55,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="font-bold text-lg tracking-tight text-fresh-text">
                   NutriLens
                 </span>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
-                  AI Lens
-                </span>
               </div>
               <p className="text-[11px] text-fresh-muted hidden sm:block">
-                Universal visual nutrition and mindful portion tracking
+                Visual nutrition and portion tracking
               </p>
             </div>
           </div>
@@ -133,12 +130,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
         </div>
-      </div>
-
-      {/* Gentle, non-judgmental guidance notice */}
-      <div className="bg-fresh-surface-alt border-t border-fresh-border px-4 py-1.5 text-center text-xs text-fresh-muted flex items-center justify-center gap-1.5">
-        <Info className="w-3.5 h-3.5 text-fresh-primary shrink-0" />
-        <span>Photo estimates can be off by 10-20%. Tap any item to adjust.</span>
       </div>
     </header>
   );

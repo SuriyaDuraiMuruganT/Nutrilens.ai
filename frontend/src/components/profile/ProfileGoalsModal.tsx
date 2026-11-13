@@ -365,32 +365,6 @@ export const ProfileGoalsModal: React.FC<ProfileGoalsModalProps> = ({ onClose, o
               </div>
             </div>
           </div>
-
-          {/* Section 3: Mobile App Backend Connection */}
-          <div className="pt-2 border-t border-fresh-border">
-            <h3 className="text-xs font-medium text-fresh-muted uppercase tracking-wider mb-2">
-              3. Mobile App Connection (Backend Server)
-            </h3>
-            <p className="text-[11px] text-fresh-muted mb-2">
-              If running on a mobile phone, set your PC's local Wi-Fi IP address so the phone can reach the backend.
-            </p>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={serverUrl}
-                onChange={(e) => setServerUrl(e.target.value)}
-                placeholder="http://10.50.6.248:8000"
-                className="flex-1 px-3 py-2 text-xs bg-fresh-surface-alt border border-fresh-border rounded-btn outline-none text-fresh-text"
-              />
-              <button
-                type="button"
-                onClick={() => setServerUrl('http://10.50.6.248:8000')}
-                className="px-3 py-2 rounded-btn bg-fresh-surface-alt border border-fresh-border text-xs text-fresh-primary hover:bg-fresh-surface font-medium"
-              >
-                Reset Default
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* Footer */}

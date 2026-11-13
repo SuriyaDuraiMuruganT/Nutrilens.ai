@@ -261,11 +261,8 @@ export const ImageInput: React.FC<ImageInputProps> = ({
                   <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-2 shadow-sm group-hover:scale-110 transition-transform">
                     <Utensils className="w-6 h-6" />
                   </div>
-                  <span className="font-display font-medium text-sm text-fresh-text">
-                    Smart AI Lens Frame
-                  </span>
-                  <span className="text-[11px] text-fresh-muted mt-1 max-w-[150px] text-center leading-tight">
-                    Center dish, bowl, or snack inside the viewfinder
+                  <span className="text-[12px] text-fresh-muted max-w-[170px] text-center leading-relaxed">
+                    Center meal plate or snack inside the frame
                   </span>
                 </div>
 
@@ -309,7 +306,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
           </div>
         )}
 
-        {/* Warm, Encouraging Quality Tips */}
+        {/* Helpful Photo Tips */}
         <div className="bg-fresh-surface-alt rounded-card p-4 border border-fresh-border text-xs">
           <div className="flex items-center gap-2 font-medium text-fresh-text mb-2">
             <Info className="w-4 h-4 text-fresh-primary" />
@@ -323,10 +320,6 @@ export const ImageInput: React.FC<ImageInputProps> = ({
             <li className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-fresh-primary shrink-0" />
               <span>Even lighting helps estimate dish volume more accurately.</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-fresh-primary shrink-0" />
-              <span>Photo estimates can be off by 10-20%. Tap any item to adjust.</span>
             </li>
           </ul>
         </div>

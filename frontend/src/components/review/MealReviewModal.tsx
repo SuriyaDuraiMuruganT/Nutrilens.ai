@@ -228,13 +228,7 @@ export const MealReviewModal: React.FC<MealReviewModalProps> = ({
               </div>
             </div>
 
-            {/* Mindful Advice Notice */}
-            <div className="p-3 bg-fresh-surface rounded-card border border-fresh-border text-[11px] text-fresh-muted flex items-start gap-2">
-              <Info className="w-4 h-4 text-fresh-primary shrink-0 mt-0.5" />
-              <span>
-                Photo estimates can be off by 10-20%. Tap any item to adjust weights or nutrients to match your meal.
-              </span>
-            </div>
+
           </div>
 
           {/* Right Column: Dish Items List (lg:col-span-7) */}

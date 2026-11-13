@@ -4,59 +4,59 @@
 
 @layer base {
   :root {
-    /* Pure Modern Airy Theme (Inspired by Calo AI & Foodvisor) */
-    --color-bg: 246 248 250;          /* #F6F8FA crisp light airy background */
-    --color-surface: 255 255 255;     /* #FFFFFF pure clean card white */
-    --color-surface-alt: 240 243 246; /* #F0F3F6 soft neutral pill background */
-    --color-border: 228 232 237;      /* #E4E8ED subtle crisp border */
-    --color-text: 15 23 42;           /* #0F172A deep dark readable slate text */
-    --color-text-muted: 100 116 139;  /* #64748B elegant slate muted */
-    --color-primary: 37 99 235;       /* #2563EB vibrant electric blue */
-    --color-primary-soft: 239 246 255;/* #EFF6FF soft blue tint */
-    --color-on-primary: 255 255 255;  /* #FFFFFF */
-    --color-warning: 239 68 68;       /* #EF4444 vivid coral red */
-    --color-warning-soft: 254 242 242;/* #FEF2F2 */
-    --color-success: 16 185 129;      /* #10B981 emerald success */
-    --color-info: 59 130 246;         /* #3B82F6 */
-    --color-accent: 249 115 22;       /* #F97316 warm orange flame */
+    /* Gourmet Organic Matcha & Warm Cream Palette (Exact to Reference UI) */
+    --color-bg: 236 238 214;          /* #ECEED6 distinctive sage/olive tinted cream background */
+    --color-surface: 247 248 238;     /* #F7F8EE organic pale cream card */
+    --color-surface-alt: 226 229 201; /* #E2E5C9 soft earthy accent surface */
+    --color-border: 216 220 188;      /* #D8DCBC gentle natural border */
+    --color-text: 24 30 20;           /* #181E14 deep earthy forest charcoal text */
+    --color-text-muted: 104 112 90;   /* #68705A subtle moss slate text */
+    --color-primary: 20 24 16;        /* #141810 sleek pill-shaped jet black */
+    --color-primary-soft: 218 223 189;/* #DADFBD */
+    --color-on-primary: 255 255 255;  /* #FFFFFF crisp white */
+    --color-warning: 225 78 53;       /* #E14E35 tomato red */
+    --color-warning-soft: 248 226 221;/* #F8E2DD */
+    --color-success: 67 122 75;       /* #437A4B natural organic green */
+    --color-info: 58 107 148;         /* #3A6B94 */
+    --color-accent: 217 119 36;       /* #D97724 warm toasted amber */
 
-    /* Nutrient Colors (Vibrant Clean Calo & Foodvisor palette) */
-    --nutrient-calories-from: #F97316;
-    --nutrient-calories-to: #F59E0B;
-    --nutrient-protein: #EF4444;       /* Vivid Coral/Red */
-    --nutrient-carbs: #F59E0B;         /* Warm Gold/Amber */
-    --nutrient-fat: #0EA5E9;           /* Clean Sky Blue */
-    --nutrient-fiber: #10B981;         /* Emerald */
-    --nutrient-sugar: #EC4899;         /* Pink */
-    --nutrient-sodium: #6366F1;        /* Indigo */
+    /* Nutrient Colors (Earthy organic balanced tones) */
+    --nutrient-calories-from: #D97724;
+    --nutrient-calories-to: #EAB308;
+    --nutrient-protein: #E14E35;       /* Salmon / Tomato */
+    --nutrient-carbs: #D97724;         /* Warm amber */
+    --nutrient-fat: #3A6B94;           /* Deep slate */
+    --nutrient-fiber: #437A4B;         /* Organic leafy green */
+    --nutrient-sugar: #C0567A;         /* Berry */
+    --nutrient-sodium: #5A7B8E;        /* Mineral slate */
   }
 
   .dark {
-    /* Modern OLED Dark Theme */
-    --color-bg: 11 15 25;             /* #0B0F19 deep night black */
-    --color-surface: 20 26 38;        /* #141A26 clean card surface */
-    --color-surface-alt: 30 38 54;    /* #1E2636 soft contrast surface */
-    --color-border: 38 48 68;         /* #263044 */
-    --color-text: 248 250 252;        /* #F8FAFC bright white text */
-    --color-text-muted: 148 163 184;  /* #94A3B8 */
-    --color-primary: 59 130 246;      /* #3B82F6 */
-    --color-primary-soft: 29 45 74;   /* #1D2D4A */
-    --color-on-primary: 255 255 255;  /* #FFFFFF */
-    --color-accent: 251 146 60;       /* #FB923C */
-    --color-warning: 248 113 113;     /* #F87171 */
-    --color-warning-soft: 54 26 26;   /* #361A1A */
-    --color-success: 52 211 153;      /* #34D399 */
-    --color-info: 96 165 250;         /* #60A5FA */
+    /* Evening Organic Slate Theme */
+    --color-bg: 24 28 22;             /* #181C16 deep olive night */
+    --color-surface: 33 39 30;        /* #21271E organic dark surface */
+    --color-surface-alt: 43 51 39;    /* #2B3327 */
+    --color-border: 52 62 48;         /* #343E30 */
+    --color-text: 242 245 233;        /* #F2F5E9 */
+    --color-text-muted: 158 168 147;  /* #9EA893 */
+    --color-primary: 242 245 233;     /* #F2F5E9 bright contrasting primary pill */
+    --color-primary-soft: 46 56 42;   /* #2E382A */
+    --color-on-primary: 20 24 16;     /* #141810 */
+    --color-accent: 234 140 50;       /* #EA8C32 */
+    --color-warning: 239 100 78;      /* #EF644E */
+    --color-warning-soft: 56 31 27;   /* #381F1B */
+    --color-success: 94 158 103;      /* #5E9E67 */
+    --color-info: 90 148 196;         /* #5A94C4 */
 
     /* Nutrient Colors (Dark Mode) */
-    --nutrient-calories-from: #FB923C;
+    --nutrient-calories-from: #EA8C32;
     --nutrient-calories-to: #FBBF24;
-    --nutrient-protein: #F87171;
+    --nutrient-protein: #EF644E;
     --nutrient-carbs: #FBBF24;
-    --nutrient-fat: #38BDF8;
-    --nutrient-fiber: #34D399;
-    --nutrient-sugar: #F472B6;
-    --nutrient-sodium: #818CF8;
+    --nutrient-fat: #5A94C4;
+    --nutrient-fiber: #5E9E67;
+    --nutrient-sugar: #D87093;
+    --nutrient-sodium: #7B9DAE;
   }
 
   html, body {

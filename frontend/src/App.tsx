@@ -174,16 +174,9 @@ export function App() {
           </div>
         </div>
 
-        {/* Hero Section / Welcome Banner - Word-wrapped and mobile-optimized */}
-        <div className="rounded-2xl bg-fresh-surface p-4 sm:p-6 border border-fresh-border shadow-soft transition-colors">
-          <div className="max-w-3xl space-y-2.5">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
-                <Sparkles className="w-3.5 h-3.5" />
-                Calo AI · Intelligent Nutrition Lens
-              </span>
-            </div>
-
+        {/* Hero Section / Welcome Banner - Minimalist Organic Aesthetic */}
+        <div className="rounded-3xl bg-fresh-surface p-5 sm:p-7 border border-fresh-border shadow-soft transition-colors">
+          <div className="max-w-3xl space-y-3">
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-fresh-text break-words">
               Track Calories & Health, Plate by Plate
             </h1>
@@ -194,14 +187,14 @@ export function App() {
             <div className="pt-1 flex items-center gap-2 sm:gap-3 flex-wrap">
               <button
                 onClick={() => setIsUploadOpen(true)}
-                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold text-xs sm:text-sm shadow-md transition"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-fresh-primary hover:opacity-90 active:scale-[0.98] text-fresh-on-primary font-semibold text-xs sm:text-sm shadow-md transition"
               >
                 <Camera className="w-4 h-4" />
                 <span>Snap Meal</span>
               </button>
               <button
                 onClick={() => setIsProfileOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-full bg-fresh-surface-alt hover:opacity-80 text-fresh-text font-medium text-xs sm:text-sm transition border border-fresh-border"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-fresh-surface-alt hover:opacity-80 text-fresh-text font-medium text-xs sm:text-sm transition border border-fresh-border"
               >
                 <span>Edit Goals</span>
               </button>
@@ -347,42 +340,38 @@ export function App() {
       />
 
       {/* Footer */}
-      <footer className="border-t border-fresh-border bg-fresh-surface py-6 mt-12 mb-16 md:mb-0 text-center text-xs text-fresh-muted transition-colors">
-        <p className="font-medium text-fresh-text font-display text-sm tracking-wide">
-          NutriLens — Fresh Table Nutrition
-        </p>
-        <p className="mt-1 font-sans">
-          Curated nutritional knowledge. Photo estimates can be off by 10–20%. Tap any item to adjust.
+      <footer className="border-t border-fresh-border bg-fresh-surface py-6 mt-12 mb-20 md:mb-0 text-center text-xs text-fresh-muted transition-colors">
+        <p className="font-semibold text-fresh-text text-sm tracking-wide">
+          NutriLens
         </p>
       </footer>
 
-      {/* Mobile Floating Bottom Navigation Bar (Visible on mobile/tablet screens) */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-fresh-surface/95 backdrop-blur-md border-t border-fresh-border px-6 py-2 flex items-center justify-between shadow-soft-lg">
+      {/* Sleek Floating Bottom Navigation Bar (Matched to Minimal Organic UI) */}
+      <div className="md:hidden fixed bottom-4 left-6 right-6 z-40 bg-zinc-900/90 dark:bg-zinc-950/90 backdrop-blur-xl text-white rounded-full px-6 py-2.5 flex items-center justify-around shadow-2xl border border-white/10">
         <button
           onClick={handleToday}
-          className="flex flex-col items-center gap-1 text-fresh-muted hover:text-fresh-text"
+          className="flex items-center justify-center p-2 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition"
+          title="Today"
         >
-          <Home className="w-5 h-5 text-fresh-primary" />
-          <span className="text-[10px] font-medium">Today</span>
+          <Home className="w-5 h-5" />
         </button>
 
-        {/* Center Prominent Native Camera Trigger */}
-        <div className="relative -top-4">
-          <button
-            onClick={() => setIsUploadOpen(true)}
-            className="w-13 h-13 rounded-full bg-fresh-primary text-fresh-on-primary flex items-center justify-center shadow-lg active:scale-95 transition transform hover:scale-105"
-            aria-label="Capture Meal Photo"
-          >
-            <Camera className="w-6 h-6" />
-          </button>
-        </div>
+        {/* Center Prominent Camera Action Pill */}
+        <button
+          onClick={() => setIsUploadOpen(true)}
+          className="flex items-center gap-2 px-5 py-2 rounded-full bg-white text-zinc-900 font-semibold text-xs shadow-lg active:scale-95 transition transform"
+          aria-label="Capture Meal Photo"
+        >
+          <Camera className="w-4 h-4 text-zinc-900" />
+          <span>Scan</span>
+        </button>
 
         <button
           onClick={() => setIsProfileOpen(true)}
-          className="flex flex-col items-center gap-1 text-fresh-muted hover:text-fresh-text"
+          className="flex items-center justify-center p-2 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition"
+          title="Profile & Targets"
         >
-          <User className="w-5 h-5 text-fresh-muted" />
-          <span className="text-[10px] font-medium">Profile</span>
+          <User className="w-5 h-5" />
         </button>
       </div>
     </div>
