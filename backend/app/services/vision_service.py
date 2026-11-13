@@ -253,48 +253,60 @@ class GeminiVisionProvider(VisionProvider):
             "8. If the image contains absolutely NO food or beverage whatsoever, set is_food to false with empty items list."
         )
 
-        # Active supported models for Gemini API (fastest, most reliable first)
+        # Active supported models for Gemini API (fastest, high-availability first)
         models_to_try = [
             "gemini-3-flash-preview",
+            "gemini-flash-lite-latest",
+            "gemini-3.5-flash-lite",
             "gemini-3.1-flash-lite",
             "gemini-3.5-flash",
-            "gemini-3.5-flash-lite",
         ]
         last_error = None
 
         import asyncio
 
         for model_name in models_to_try:
-            try:
-                logger.info(f"Analyzing image with Gemini model: {model_name}...")
+            # Try model up to 2 times (with short backoff on 503 high demand)
+            for attempt in range(2):
+                try:
+                    logger.info(f"Analyzing image with Gemini model: {model_name} (attempt {attempt + 1})...")
 
-                def _generate(m=model_name):
-                    return client.models.generate_content(
-                        model=m,
-                        contents=[
-                            types.Part.from_bytes(data=image_bytes, mime_type=mime_type),
-                            prompt
-                        ],
-                        config=types.GenerateContentConfig(
-                            response_mime_type="application/json",
-                            response_schema=VisionAnalysisResult,
-                            temperature=0.1
+                    def _generate(m=model_name):
+                        return client.models.generate_content(
+                            model=m,
+                            contents=[
+                                types.Part.from_bytes(data=image_bytes, mime_type=mime_type),
+                                prompt
+                            ],
+                            config=types.GenerateContentConfig(
+                                response_mime_type="application/json",
+                                response_schema=VisionAnalysisResult,
+                                temperature=0.1
+                            )
                         )
-                    )
 
-                response = await asyncio.wait_for(asyncio.to_thread(_generate), timeout=60.0)
+                    response = await asyncio.wait_for(asyncio.to_thread(_generate), timeout=25.0)
 
-                if response.text:
-                    parsed_json = json.loads(response.text)
-                    validated = VisionAnalysisResult.model_validate(parsed_json)
-                    logger.info(f"Gemini analysis successful ({model_name}): {len(validated.items)} items detected.")
-                    return validated
-            except asyncio.TimeoutError:
-                logger.warning(f"Gemini model {model_name} timed out after 60s. Trying next candidate...")
-                last_error = TimeoutError(f"Model {model_name} timed out after 60s")
-            except Exception as e:
-                logger.warning(f"Gemini model {model_name} failed: {e}")
-                last_error = e
+                    if response.text:
+                        parsed_json = json.loads(response.text)
+                        validated = VisionAnalysisResult.model_validate(parsed_json)
+                        logger.info(f"Gemini analysis successful ({model_name}): {len(validated.items)} items detected.")
+                        return validated
+
+                except asyncio.TimeoutError:
+                    logger.warning(f"Gemini model {model_name} timed out after 25s.")
+                    last_error = TimeoutError(f"Model {model_name} timed out")
+                    break  # Go to next model candidate immediately
+                except Exception as e:
+                    err_str = str(e)
+                    last_error = e
+                    if "503" in err_str or "UNAVAILABLE" in err_str or "high demand" in err_str:
+                        logger.warning(f"Gemini model {model_name} 503 high demand on attempt {attempt + 1}. Backing off 1.5s...")
+                        if attempt == 0:
+                            await asyncio.sleep(1.5)
+                            continue  # Retry once after jitter
+                    logger.warning(f"Gemini model {model_name} failed: {e}")
+                    break  # Go to next model candidate
 
         # If strict Gemini mode is active and Gemini failed, raise error with details
         logger.error(f"All Gemini models failed ({last_error}).")
